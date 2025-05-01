@@ -13,7 +13,24 @@ class _ChapterListScreenState extends State<ChapterListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Select Chapter'),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF000080), // Dark blue
+                Color(0xFF6495ED), // Light blue
+              ],
+            ),
+          ),
+        ),
+        title: const Text(
+          'Select Chapter',
+          style: TextStyle(
+            ),
+          ),
+        ),
       ),
       body: ListView.builder(
         itemCount: chapters.length,
