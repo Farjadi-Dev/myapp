@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:myapp/screens/question_detail_screen.dart';
 import '../models/question.dart';
 
@@ -18,32 +19,50 @@ class QuestionListScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     final questions = getQuestionsForChapter();
     return Scaffold(
       appBar: AppBar(
         title: Text(chapterTitle),
+        backgroundColor: Colors.deepPurple,
       ),
-      body: ListView.builder(
-        itemCount: questions.length,
-        itemBuilder: (context, index) {
-          final question = questions[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuestionDetailScreen(question: question),
-                  ),
-                );
-              },
-              child: Text('Question ${index + 1}'),            
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView.separated(
+          itemCount: questions.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 10),
+          itemBuilder: (context, index) {
+            final question = questions[index];
+            return _buildQuestionCard(context, question, index + 1);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuestionCard(BuildContext context, Question question, int index) {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            CupertinoPageRoute(
+              builder: (context) => QuestionDetailScreen(question: question),
             ),
           );
         },
-      )
+        borderRadius: BorderRadius.circular(15.0),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            'Question $index',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
     );
   }
 }
