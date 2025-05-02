@@ -23,18 +23,36 @@ class QuestionListScreen extends StatelessWidget {
     final questions = getQuestionsForChapter();
     return Scaffold(
       appBar: AppBar(
-        title: Text(chapterTitle),
+        title: Text(
+          chapterTitle,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.deepPurple,
+        elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView.separated(
-          itemCount: questions.length,
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemBuilder: (context, index) {
-            final question = questions[index];
-            return _buildQuestionCard(context, question, index + 1);
-          },
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.deepPurple.shade50, Colors.white],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 1.5,
+            ),
+            itemCount: questions.length,
+            itemBuilder: (context, index) {
+              final question = questions[index];
+              return _buildQuestionCard(context, question, index + 1);
+            },
+          ),
         ),
       ),
     );
@@ -42,9 +60,9 @@ class QuestionListScreen extends StatelessWidget {
 
   Widget _buildQuestionCard(BuildContext context, Question question, int index) {
     return Card(
-      elevation: 2,
+      elevation: 3,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(12.0),
       ),
       child: InkWell(
         onTap: () {
@@ -54,12 +72,35 @@ class QuestionListScreen extends StatelessWidget {
             ),
           );
         },
-        borderRadius: BorderRadius.circular(15.0),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            'Question $index',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        borderRadius: BorderRadius.circular(12.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.white, Colors.deepPurple.shade50],
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.question_answer_rounded,
+                color: Colors.deepPurple.shade300,
+                size: 24,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Question $index',
+                style: const TextStyle(
+                  fontSize: 16, 
+                  fontWeight: FontWeight.w600,
+                  color: Colors.deepPurple,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),

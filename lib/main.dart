@@ -9,32 +9,80 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {    
+    final lightColorScheme = ColorScheme.fromSeed(
+      seedColor: Colors.deepPurple,
+      brightness: Brightness.light,
+    );
+    
     final darkColorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.blue,
+      seedColor: Colors.deepPurple,
       brightness: Brightness.dark,
     );
-    final darkTheme = ThemeData(
-        useMaterial3: true,
-        colorScheme: darkColorScheme,
-        textTheme: GoogleFonts.montserratTextTheme().apply(
-          bodyColor: darkColorScheme.onBackground,
-          displayColor: darkColorScheme.onBackground,
+    
+    final lightTheme = ThemeData(
+      useMaterial3: true,
+      colorScheme: lightColorScheme,
+      textTheme: GoogleFonts.poppinsTextTheme().apply(
+        bodyColor: lightColorScheme.onBackground,
+        displayColor: lightColorScheme.onBackground,
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
+        titleTextStyle: GoogleFonts.poppins(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        appBarTheme: AppBarTheme(
-            backgroundColor: darkColorScheme.surfaceVariant,
-            foregroundColor: darkColorScheme.onSurfaceVariant,
-            titleTextStyle: TextStyle(
-                color: darkColorScheme.onSurfaceVariant,
-                fontSize: 20,
-                fontWeight: FontWeight.bold)));
+      ),
+      cardTheme: CardTheme(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.deepPurple,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        ),
+      ),
+    );
+    
+    final darkTheme = ThemeData(
+      useMaterial3: true,
+      colorScheme: darkColorScheme,
+      textTheme: GoogleFonts.poppinsTextTheme().apply(
+        bodyColor: darkColorScheme.onBackground,
+        displayColor: darkColorScheme.onBackground,
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: darkColorScheme.surfaceVariant,
+        foregroundColor: darkColorScheme.onSurfaceVariant,
+        titleTextStyle: GoogleFonts.poppins(
+          color: darkColorScheme.onSurfaceVariant,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      cardTheme: CardTheme(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
 
     return MaterialApp(      
-        title: 'Question App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.dark,
-        home: ChapterListScreen());
+      title: 'Question App',
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.light,
+      home: ChapterListScreen(),
+    );
   }
 }

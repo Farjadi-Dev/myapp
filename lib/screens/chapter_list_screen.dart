@@ -13,51 +13,112 @@ class _ChapterListScreenState extends State<ChapterListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
+        title: const Text(
+          'Select Chapter',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.deepPurple,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.deepPurple.shade50, Colors.white],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 8.0, bottom: 16.0),
+                child: Text(
+                  'Select a chapter to start:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.deepPurple,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 1.3,
+                  ),
+                  itemCount: chapters.length,
+                  itemBuilder: (context, index) {
+                    return _buildChapterCard(context, chapters[index], index);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildChapterCard(BuildContext context, String chapterTitle, int index) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => 
+                QuestionListScreen(chapterTitle: chapterTitle),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) => 
+                FadeTransition(opacity: animation, child: child),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(12.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF000080), // Dark blue
-                Color(0xFF6495ED), // Light blue
+                Colors.white,
+                Colors.deepPurple.shade50,
               ],
             ),
           ),
-        ),        
-        title: const Text(
-          'Select Chapter',
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.book,
+                color: Colors.deepPurple.shade400,
+                size: 36,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                chapterTitle,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
-      body: ListView.builder(
-          itemCount: chapters.length,
-          itemBuilder: (context, index) {
-            print('Building item at index: $index');
-            return Padding( // Padding Widget start
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0), // Padding
-              child: Card( // Card Widget start
-                elevation: 2.0, // Card elevation
-                shape: RoundedRectangleBorder( // Card Shape
-                  borderRadius: BorderRadius.circular(10.0), // Card border radius
-                ),
-                child: ListTile( // ListTile start
-                  title: Text(chapters[index]), // ListTile title
-                  onTap: () { // ListTile onTap
-                    Navigator.push( // Navigator push
-                      context, // context
-                      PageRouteBuilder( // PageRouteBuilder
-                        pageBuilder: (context, animation, secondaryAnimation) => QuestionListScreen(chapterTitle: chapters[index]),
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(opacity: animation, child: child),
-                      ), // PageRouteBuilder
-                    ); // Navigator push
-                  },
-                ), // ListTile end
-              ), // Card Widget end
-            ); // Padding Widget end
-          },
-        ),
-      );
-
+    );
   }
 }
 
