@@ -13,7 +13,7 @@ class QuestionListScreen extends StatelessWidget {
     int chapterNumber = int.tryParse(chapterTitle.split(' ').last) ?? 1; // Extract chapter number, default to 1 if parsing fails
     List<Question> questions = [];
     for (int i = 1; i <= 100; i++) {
-      questions.add(Question(questionText: 'This is the content of Question $i', answerText: 'This is the answer to Question $i'));
+      questions.add(Question.createPersianDemo(i)); // Using Persian demo questions
     }
     return questions;
   }
@@ -45,7 +45,7 @@ class QuestionListScreen extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 1.5,
+              childAspectRatio: 2.5, // Make the boxes more compact horizontally
             ),
             itemCount: questions.length,
             itemBuilder: (context, index) {
@@ -82,19 +82,19 @@ class QuestionListScreen extends StatelessWidget {
               colors: [Colors.white, Colors.deepPurple.shade50],
             ),
           ),
-          child: Column(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.question_answer_rounded,
                 color: Colors.deepPurple.shade300,
-                size: 24,
+                size: 20,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(width: 8),
               Text(
-                'Question $index',
+                'سوال $index',  // Persian text
                 style: const TextStyle(
-                  fontSize: 16, 
+                  fontSize: 14, 
                   fontWeight: FontWeight.w600,
                   color: Colors.deepPurple,
                 ),

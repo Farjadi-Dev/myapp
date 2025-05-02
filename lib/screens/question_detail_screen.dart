@@ -13,7 +13,7 @@ class QuestionDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Question Detail',
+          'جزئیات سوال',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.deepPurple,
@@ -34,14 +34,15 @@ class QuestionDetailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
+                  padding: EdgeInsets.only(right: 8.0, bottom: 8.0),
                   child: Text(
-                    'Question:',
+                    'سوال:',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.deepPurple,
                     ),
+                    textAlign: TextAlign.right,
                   ),
                 ),
                 Card(
@@ -66,19 +67,22 @@ class QuestionDetailScreen extends StatelessWidget {
                         fontSize: 16, 
                         fontWeight: FontWeight.w500,
                       ),
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
                 ),
                 const SizedBox(height: 24),
                 const Padding(
-                  padding: EdgeInsets.only(left: 8.0, bottom: 8.0),
+                  padding: EdgeInsets.only(right: 8.0, bottom: 8.0),
                   child: Text(
-                    'Answer:',
+                    'پاسخ:',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.deepPurple,
                     ),
+                    textAlign: TextAlign.right,
                   ),
                 ),
                 Card(
@@ -107,6 +111,8 @@ class QuestionDetailScreen extends StatelessWidget {
                         fontSize: 16,
                         height: 1.5,
                       ),
+                      textAlign: TextAlign.right,
+                      textDirection: TextDirection.rtl,
                     ),
                   ),
                 ),
