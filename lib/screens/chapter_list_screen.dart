@@ -7,14 +7,14 @@ class ChapterListScreen extends StatefulWidget {
 }
 
 class _ChapterListScreenState extends State<ChapterListScreen> {
-  final List<String> chapters = List.generate(5, (index) => 'فصل ${index + 1}');
+  final List<String> chapters = List.generate(5, (index) => 'Chapter ${index + 1}');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'انتخاب فصل',
+          'Select Chapter',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.deepPurple,
@@ -34,15 +34,14 @@ class _ChapterListScreenState extends State<ChapterListScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: EdgeInsets.only(right: 8.0, bottom: 16.0),
+                padding: EdgeInsets.only(left: 8.0, bottom: 16.0),
                 child: Text(
-                  'فصل مورد نظر را انتخاب کنید:',
+                  'Select a chapter to start:',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: Colors.deepPurple,
                   ),
-                  textAlign: TextAlign.right,
                 ),
               ),
               Expanded(

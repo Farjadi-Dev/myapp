@@ -13,7 +13,10 @@ class QuestionListScreen extends StatelessWidget {
     int chapterNumber = int.tryParse(chapterTitle.split(' ').last) ?? 1; // Extract chapter number, default to 1 if parsing fails
     List<Question> questions = [];
     for (int i = 1; i <= 100; i++) {
-      questions.add(Question.createPersianDemo(i)); // Using Persian demo questions
+      questions.add(Question(
+        questionText: 'This is the content of Question $i', 
+        answerText: 'This is the answer to Question $i'
+      ));
     }
     return questions;
   }
@@ -92,7 +95,7 @@ class QuestionListScreen extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'سوال $index',  // Persian text
+                'Question $index',
                 style: const TextStyle(
                   fontSize: 14, 
                   fontWeight: FontWeight.w600,

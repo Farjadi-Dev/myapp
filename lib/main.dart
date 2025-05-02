@@ -23,14 +23,14 @@ class MyApp extends StatelessWidget {
     final lightTheme = ThemeData(
       useMaterial3: true,
       colorScheme: lightColorScheme,
-      textTheme: GoogleFonts.vazirmatnTextTheme().apply(
+      textTheme: GoogleFonts.poppinsTextTheme().apply(
         bodyColor: lightColorScheme.onBackground,
         displayColor: lightColorScheme.onBackground,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
-        titleTextStyle: GoogleFonts.vazirmatn(
+        titleTextStyle: GoogleFonts.poppins(
           color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -57,14 +57,14 @@ class MyApp extends StatelessWidget {
     final darkTheme = ThemeData(
       useMaterial3: true,
       colorScheme: darkColorScheme,
-      textTheme: GoogleFonts.vazirmatnTextTheme().apply(
+      textTheme: GoogleFonts.poppinsTextTheme().apply(
         bodyColor: darkColorScheme.onBackground,
         displayColor: darkColorScheme.onBackground,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: darkColorScheme.surfaceVariant,
         foregroundColor: darkColorScheme.onSurfaceVariant,
-        titleTextStyle: GoogleFonts.vazirmatn(
+        titleTextStyle: GoogleFonts.poppins(
           color: darkColorScheme.onSurfaceVariant,
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -79,26 +79,23 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(      
-      title: 'سوالات آزمون',
+      title: 'Question App',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.light,
       home: ChapterListScreen(),
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en', 'US'),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('fa', 'IR'),
         Locale('en', 'US'),
+        Locale('fa', 'IR'),
       ],
       builder: (context, child) {
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: child!,
-        );
+        return child!;
       },
     );
   }
